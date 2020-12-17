@@ -262,20 +262,30 @@ function callbackforShowModal(bool,obj){
                                                             //Add to Cart
 //Product add to localStorage
 function addToCart(){
-    var productFullID = this.id;
-    var product=productFullID.split("-");
-    var productCategory=product[0];
-    var productID=product[1];
-    var custName=document.getElementById("welcome-user").innerText;
-
-    cartOperations.searchCart(callbackForCart,custName.split(" ")[1],productCategory,productID,true);
-    if(document.getElementsByClassName("newEvent")[0]){
+    if(this.id == ""){
         swal.fire({
-            icon: "success",
-            title: "Product Added In The Cart",
-            text: "Your product is added into the cart. Thank You for the purchase."
+            icon: "error",
+            title: "Products Still Loading",
+            text: "Products are still loading, Please wait till the products are loaded."
         });
     }
+    else{
+        var productFullID = this.id;
+        var product=productFullID.split("-");
+        var productCategory=product[0];
+        var productID=product[1];
+        var custName=document.getElementById("welcome-user").innerText;
+
+        cartOperations.searchCart(callbackForCart,custName.split(" ")[1],productCategory,productID,true);
+        if(document.getElementsByClassName("newEvent")[0]){
+            swal.fire({
+                icon: "success",
+                title: "Product Added In The Cart",
+                text: "Your product is added into the cart. Thank You for the purchase."
+            });
+        }
+    }
+    
 }
 
 function callbackForCart(bool,cartObj,productCategory,productID){
