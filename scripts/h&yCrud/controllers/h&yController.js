@@ -5,24 +5,20 @@ function registerEvents(){
         checkUserToken(true);
         document.getElementById("signOut").addEventListener('click',signout);
     }
-    
+    var cart=document.getElementsByClassName("button-cart");
+    for(let addProduct of cart){
+        addProduct.addEventListener("click",addToCart);
+    }    
 
     var buttons = document.getElementsByClassName("button-view");
     for(let button of buttons){
         button.addEventListener("click",viewProduct);
-    }
-   
-    var cart=document.getElementsByClassName("button-cart");
-    for(let addProduct of cart){
-        addProduct.addEventListener("click",addToCart);
-    }
-
+    }    
     loadCategories();
     loadOffers();
     if(document.getElementById("searchProductDetails")){
         document.getElementById('searchProductDetails').addEventListener('click',productSearch);
     }
-    
 }
                                                             //Token Check
                                                 
@@ -157,32 +153,109 @@ function callBackForSignOut(bool,localToken,userObj){
 //Get the Details of the Product that is to be View
 function viewProduct(){
     
-    var productFullID=this.id;
-    var product=productFullID.split("-");
-    var productCategory=product[0];
-    var productID=product[1];
+    if(this.id == ""){
+        let imgDiv = document.getElementById("empty-image");
+        let pColor = document.getElementById("Product_Colour");
+        let pDescription = document.getElementById("Product_Description");
+        let pName = document.getElementById("Product_Name");
+        let pNameParent = pName.parentElement;
 
-    var btnCart=document.getElementsByClassName('button-modal-cart')[0];
-    btnCart.id=productFullID;
+        if(document.getElementsByClassName("button-modal-cart")[0]){
+            let cartButton = document.getElementsByClassName("button-modal-cart")[0];
+            cartButton.parentElement.removeChild(cartButton);
+        }
 
-    
-    productOperations.search(callbackforShowModal,productID,productCategory,true);
+        if(document.getElementById("Product_ImageUrl")){
+            imgDiv.parentElement.removeChild(imgDiv);
+        }
+
+        pNameParent.parentElement.className = "col-lg-12";
+        pColor.innerText = "Products Still Loading";
+        pDescription.innerText = "Products are still loading, Please wait till the products are loaded.";
+    }
+
+    else{
+        let productFullID=this.id;
+        let product=productFullID.split("-");
+        let productCategory=product[0];
+        let productID=product[1];
+
+
+        if(document.getElementsByClassName("button-modal-cart")[0]){
+            let btnCart=document.getElementsByClassName('button-modal-cart')[0];
+            btnCart.id=productFullID;
+
+            productOperations.search(callbackforShowModal,productID,productCategory,true);
+        }
+
+        else{
+            let newCartButton = document.createElement("button");
+            newCartButton.className = "newEvent button-cart button-modal-cart btn btn-primary";
+            if(document.getElementById("welcome-user")){
+                newCartButton.addEventListener("click",addToCart);
+                newCartButton.id = productFullID;
+            }
+            else{
+                newCartButton.onclick = ()=>{
+                    location.href = "login.html";
+                };
+            }
+            newCartButton.innerText = "Add To Cart";
+
+            let icon = document.createElement("i");
+            icon.className = "fas fa-cart-plus ml-2";
+            icon["area-hidden"] = true;
+            newCartButton.appendChild(icon);
+
+            let parentDiv = document.getElementById("button-modal");
+            parentDiv.appendChild(newCartButton);
+
+            productOperations.search(callbackforShowModal,productID,productCategory,true);
+        }
+    }
+   
 }
 
 //To show the Product Full Details
 function callbackforShowModal(bool,obj){
+    var p_name = document.getElementById("Product_Name");
+    var p_price = document.getElementById("Product_Price");
+    var p_desc = document.getElementById("Product_Description");
+    var p_color = document.getElementById("Product_Colour");
+    var p_imageUrl = document.getElementById("Product_ImageUrl");
+    
     if(bool==true){
-        var p_name=document.getElementById("Product_Name");
-        var p_price=document.getElementById("Product_Price");
-        var p_desc=document.getElementById("Product_Description");
-        var p_color=document.getElementById("Product_Colour");
-        var p_imageUrl=document.getElementById("Product_ImageUrl");
+        
+        if(document.getElementById("Product_ImageUrl")){
+            p_imageUrl.src = obj.product_url;
+        }
+        else{
+            let div = document.createElement("div");
+            div.id = "empty-image";
+            div.className = "col-lg-5";
+
+            let image = document.createElement("img");
+            image.className = "d-block w-100 rounded";
+            image.style = "margin-left: 0%";
+            image.id = "Product_ImageUrl";
+            image.src = obj.product_url;
+
+            div.appendChild(image);
+            let parentRow = document.getElementById("rowModal");
+            parentRow.appendChild(div);
+
+            let pName = document.getElementById("Product_Name");
+            let pNameParent = pName.parentElement;
+
+            pNameParent.parentElement.className = "col-lg-7";
+        }
+        
         
         p_name.innerText=obj.product_name;
         p_price.innerText="Price :" + "\u20B9" +obj.product_price;
         p_desc.innerText="About Product :"+obj.product_desc;
         p_color.innerText="Product Colour: "+obj.product_color;
-        p_imageUrl.src=obj.product_url;
+        
     }
 }
 
@@ -196,6 +269,13 @@ function addToCart(){
     var custName=document.getElementById("welcome-user").innerText;
 
     cartOperations.searchCart(callbackForCart,custName.split(" ")[1],productCategory,productID,true);
+    if(document.getElementsByClassName("newEvent")[0]){
+        swal.fire({
+            icon: "success",
+            title: "Product Added In The Cart",
+            text: "Your product is added into the cart. Thank You for the purchase."
+        });
+    }
 }
 
 function callbackForCart(bool,cartObj,productCategory,productID){
