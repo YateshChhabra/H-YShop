@@ -8,17 +8,20 @@ function changePassword(){
     emptySpan();
     var inputArr = document.getElementsByClassName('input-field');
     var spanArr =document.getElementsByClassName('blank-fields');
-    if(inputArr[0].value == '' && inputArr[1].value != '' && inputArr[2].value != ''){
+    if(inputArr[0].value == '' && inputArr[1].value != '' && inputArr[2].value != '' && inputArr[3].value != ''){
         spanArr[0].innerText = 'Enter username to proceed';
     }
-    else if(inputArr[0].value != '' && inputArr[1].value == '' && inputArr[2].value != ''){
-        spanArr[1].innerText = 'Enter new password to proceed';
+    else if(inputArr[0].value != '' && inputArr[1].value == '' && inputArr[2].value != '' && inputArr[3].value != ''){
+        spanArr[1].innerText = 'Enter Last 4 digit of Mobile to proceed';
     }
-    else if(inputArr[0].value != '' && inputArr[1].value != '' && inputArr[2].value == ''){
+    else if(inputArr[0].value != '' && inputArr[1].value != '' && inputArr[2].value == ''  && inputArr[3].value != ''){
+        spanArr[2].innerText = 'Enter new password to proceed';
+    }
+    else if(inputArr[0].value != '' && inputArr[1].value != '' && inputArr[2].value != ''  && inputArr[3].value == ''){
         spanArr[2].innerText = 'Enter password to proceed';
     }
-    else if(inputArr[0].value != '' && inputArr[1].value != '' && inputArr[2].value != ''){
-        if(inputArr[1].value == inputArr[2].value){
+    else if(inputArr[0].value != '' && inputArr[1].value != '' && inputArr[2].value != '' && inputArr[3].value != ''){
+        if(inputArr[2].value == inputArr[3].value){
             let username=inputArr[0].value;
             userOperations.newSearch(callBackForUser,username,true);
         }
@@ -33,12 +36,17 @@ function changePassword(){
 }
 
 function callBackForUser(bool,userObject){
+    
     if(bool == true){
         var inputArr = document.getElementsByClassName('input-field');
-        userObject.password = inputArr[1].value;
-        userOperations.add(userObject);
-        alert("Password changed successfully");
-        emptyInputFields();
+        var lastFour = userObject.phoneNumber.substr(userObject.phoneNumber.length - 4);
+       
+        if(lastFour == inputArr[1].value){
+            userObject.password = inputArr[2].value;
+            userOperations.add(userObject);
+            alert("Password changed successfully");
+            emptyInputFields();
+        }
     }
     else{
         document.getElementById("error").innerText = "Invalid username";
