@@ -1,0 +1,39 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  body{
+    background: #286482;
+    background: -webkit-linear-gradient(to right, #286482, #09161c);
+    background: linear-gradient(to right, #286482, #09161c);
+    min-height: 100vh;
+}
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  
+.contain{
+  width:58%
+}
+.removeProduct{
+  color: red !important;
+}
+
+.spanOfferError{
+  margin-bottom: 5px !important;
+}
+
+.searchNotFound::placeholder { 
+  color: red;
+ 
+}
+.searchFound::placeholder { 
+  color: gray;
+ 
+}

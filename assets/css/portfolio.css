@@ -1,0 +1,52 @@
+body{
+background: #286482;
+background: -webkit-linear-gradient(to right, #286482, #09161c);
+background: linear-gradient(to right, #286482, #09161c);
+color: white !important;
+}
+
+tbody, p {
+color: white !important;  
+}
+
+hr{
+border-color: white;
+}
+
+p{
+color: white !important;
+}
+
+.my-nav-bar{
+    width: 62%;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.change-color{
+    color: black !important;
+}
+
+.searchNotFound::placeholder { 
+  color: red;
+ 
+}
+
+.searchFound::placeholder { 
+  color: gray;
+ 
+}
+
+.relatedProducts{
+  color: white; 
+}
+
+.relatedProducts:hover{
+  color: black; 
+}

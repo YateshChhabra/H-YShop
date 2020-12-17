@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!--Bootstrap-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://mdbootstrap.com/previews/ecommerce-demo/css/mdb-pro.min.css">
+      <link rel="stylesheet" href="https://mdbootstrap.com/previews/ecommerce-demo/css/mdb.ecommerce.min.css">
+      <script src="https://mdbootstrap.com/previews/ecommerce-demo/js/jquery-3.4.1.min.js"></script>
+      <script src="https://mdbootstrap.com/previews/ecommerce-demo/js/popper.min.js"></script>
+      <script src="https://mdbootstrap.com/previews/ecommerce-demo/js/bootstrap.js"></script>
+      <!--Font Awesome-->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+      <!--Roboto Font-->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&display=swap">
+      <!--Firebase-->
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+      <script src="utils/firebaseConfig.js"></script>
+      <!--CSS-->
+      <link rel="stylesheet" type="text/css" href="assets/css/portfolio.css">
+      <!--Portfolio-->
+      <script src="scripts/userCrud/models/userOperations.js"></script>
+      <script src="scripts/portfolioCrud/controllers/portfolioController.js"></script>
+      <script src="scripts/cartCrud/models/cartOperations.js"></script>
+      <script src="scripts/portfolioCrud/models/portfolioOperations.js"></script>
+      <script src="utils/checkUserAuth.js"></script>
+      <script src="utils/compareToken.js"></script>
+      <script src="utils/randomNumber.js"></script>
+      <script src="scripts/productCrud/models/productOperations.js"></script>
+   </head>
+   <body class="skin-light">
+      <header>
+         <div class="navbar navbar-dark bg-dark shadow-sm">
+         <div class="container contain d-flex justify-content-between my-nav-bar" >
+            <a href="h&yshop.html"><strong class="navbar-brand d-flex align-items-center"><i class="fas fa-shopping-bag fa-2x"></i>&nbsp; H&Y Shop</strong></a>
+            <div class="form-inline">
+               <input class="form-control mr-sm-2" id="enterProduct" type="search" placeholder="Search" aria-label="Search">
+               <button class="btn btn-outline-info my-2 my-sm-0" id="searchProductDetails" type="submit">Search</button>
+            </div>
+            <button onclick="location.href='cart.html'" class="btn btn-outline-info"><i class="fas fa-shopping-cart fa-lg"></i></button>
+            <button  id="signOut" class="btn btn-outline-info"><i class="fas fa-sign-out-alt fa-lg"></i></button>
+            <strong id="welcome-user" class="navbar-brand d-flex align-items-center"></strong>
+         </div>
+      </header>
+      <main>
+         <div class="container">
+            <section class="mb-5">
+               <div class="row mb-0">
+                  <div class="col-md-12 mb-4 mb-md-0 mb-0">
+                     <div class="mt-3">
+                        <div class="row product-gallery mx-1">
+                           
+                           <div class="col-md-6"   >
+                              <img  id="product_url" src="" style="width:100%; height: 70%" >
+                           </div>
+
+                           <div class="col-md-6" >
+                              <h5 id="product_name"></h5>
+                              <p class="mb-2 small" id="productCategory"></p>
+                              <p><span class="mr-1"><strong id="product_price"></strong></span></p>
+                              <p class="pt-1" id="product_desc">                              </p>
+                              <div class="table-responsive">
+                                 <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                       <tr>
+                                          <th class="pl-0 w-25" scope="row"><strong>Color</strong></th>
+                                          <td id="product_color"></td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <button type="button" class="btn btn-light btn-md mr-1 mb-2" id="add-to-cart"  data-toggle="modal" data-target="#modalAbandonedCart"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+
+            <hr >
+ 
+            <section class="text-center col-md-12 mb-5">
+               <h4 class="text-center my-5"><strong>Related Products</strong></h4>
+               <div class="row " >
+                  <div class="col-md-6 col-lg-3 mb-5 mb-md-0">
+                     <div class="">
+                        
+                        <div class="view zoom overlay z-depth-2 rounded">
+                        <a href="javascript:void(0)" class="relatedProducts">
+                           <img class="img-fluid w-100 product-url" src="assets/public/imageload/loading1.gif" alt="Sample">
+                           <h5 class="product-name pt-4" href="#"></h5>
+                        </a>
+                           <p><span><strong class="product-price"></strong></span></p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3 mb-5 mb-md-0">
+                     <div class="">
+                        
+                        <div class="view zoom overlay z-depth-2 rounded">
+                        <a href="javascript:void(0)" class="relatedProducts">
+                           <img class="img-fluid w-100 product-url" src="assets/public/imageload/loading1.gif" alt="Sample">
+                           <h5 class="product-name pt-4"></h5>
+                        </a>
+                           <p><span><strong class="product-price"></strong></span></p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3 mb-5 mb-md-0">
+                     <div class="">
+                          
+                        <div class="view zoom overlay z-depth-2 rounded">
+                        <a href="javascript:void(0)" class="relatedProducts">
+                           <img class="img-fluid w-100 product-url" src="assets/public/imageload/loading1.gif" alt="Sample">
+                           <h5 class="product-name pt-4"></h5>
+                        </a>
+                           <p><span><strong class="product-price"></strong></span></p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3 mb-5 mb-md-0">
+                     <div class="">
+                        
+                        <div class="view zoom overlay z-depth-2 rounded">
+                        <a href="javascript:void(0)" class="relatedProducts">
+                           <img class="img-fluid w-100 product-url" src="assets/public/imageload/loading1.gif" alt="Sample">
+                           <h5 class="product-name pt-4"></h5>
+                        </a>
+                           <p><span><strong class="product-price"></strong></span></p>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </section>
+         </div>
+      </main>
+      <footer class="page-footer text-light font-small bg-primary ">
+         <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a class="text-light" target="_blank" style="text-decoration: none;" href="https://github.com/YateshChhabra">github.com/YateshChhabra</a>
+         </div>
+      </footer>
+
+      <div class="modal fade right" id="modalAbandonedCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" data-backdrop="false">
+         <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <p class="heading">Product Added In The Cart</p>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true" class="white-text">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+               <div class="col-3">
+                  <p></p>
+                  <p class="text-center"><i class="fas fa-shopping-cart fa-4x"></i></p>
+               </div>
+               <div class="col-9">
+                  <p class="change-color">Your product is added into the cart.</p>
+                  <p class="change-color">Thank You for the purchase.</p>
+               </div>
+               </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+               <a href="cart.html" type="button" class="btn btn-outline-dark waves-effect">Go to cart</a>
+               <a type="button" class="btn btn-outline-dark waves-effect" data-dismiss="modal">Cancel</a>
+            </div>
+         </div>
+         </div>
+      </div>
+
+
+
+
+   </body>
+</html>
