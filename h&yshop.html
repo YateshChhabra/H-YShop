@@ -14,7 +14,9 @@
       <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
       <script src="utils/firebaseConfig.js"></script>
-     
+      <!--Sweet Alert 2-->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
       <!--Css-->
       <link rel="stylesheet" type="text/css" href="assets/css/h&yshop.css">
       <!--Cart Script-->
@@ -68,7 +70,7 @@
          <div class="album py-5 ">
             <div class="container">
                <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -86,7 +88,7 @@
                      </div>
                   </div>
                   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -104,7 +106,7 @@
                      </div>
                   </div>
                   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -127,7 +129,7 @@
                   </div>
 
                   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -145,7 +147,7 @@
                      </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -163,7 +165,7 @@
                      </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -194,7 +196,7 @@
                   
 
 
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -212,7 +214,7 @@
                      </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -230,7 +232,7 @@
                      </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-12">
                      <div class="card mb-4 shadow-sm productDetails">
                         <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
                         <div class="card-body">
@@ -252,17 +254,18 @@
             </div>
          </div>
       </main>
-      <!-- Modal: modalQuickView -->
+
+      <!-- Modal: View Product Detail Model Start-->
       <div class="modal fade" id="modalQuickView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-lg" >
          <div class="modal-content">
             <div class="modal-body">
-               <div class="row">
-                  <div class="col-lg-5">
+               <div class="row" id="rowModal">
+                  <div class="col-lg-5 col-sm-6" id="empty-image">
                      <img class="d-block w-100 rounded productDetails" id="Product_ImageUrl"   style="height:80% !important;margin-top:15%;margin-left:3% ;" src="assets/public/imageload/loading1.gif" >
                   </div>
-                  <div class="col-lg-7">
+                  <div class="col-lg-7 col-sm-6">
                      <h2 class="h2-responsive product-name">
                         <strong id="Product_Name" class="productDetails" style="margin-left: 5%;"></strong>
                      </h2>
@@ -280,7 +283,7 @@
                         </div>
                      </div>
                      <div class="card-body">
-                        <div class="text-center">
+                        <div class="text-center" id="button-modal">
                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                            <button class="btn btn-primary button-modal-cart button-cart"data-toggle="modal" data-target="#modalAbandonedCart">Add to Cart
                            <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
@@ -293,7 +296,9 @@
          </div>
       </div>
    </div>
-   <!-- Modal: modalQuickView -->
+   <!-- Modal: View Product Detail Model End-->
+
+   <!-- Modal: Product Add To Cart Start-->
       <footer class="page-footer text-light font-small bg-primary">
          <div class="footer-copyright text-center py-3">© 2020 Copyright:
             <a class="text-light" target="_blank" style="text-decoration: none;" href="https://github.com/YateshChhabra">github.com/YateshChhabra</a>
@@ -329,10 +334,6 @@
          </div>
          </div>
       </div>
-
-
-
-
-
+   <!-- Modal: Product Add To Cart End-->
    </body>
 </html>
