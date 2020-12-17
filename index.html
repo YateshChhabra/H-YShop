@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!--Bootstrap-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <!--Font Awsome-->
+      <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>  
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+      <!--Firebase-->
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+      <script src="utils/firebaseConfig.js"></script>
+      <script src="utils/randomNumber.js"></script>
+      <!--Css-->
+      <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+      <!--Cart Script-->
+      <script src="scripts/productCrud/models/productOperations.js"></script>
+      <script src="scripts/h&yCrud/controllers/h&yController.js"></script>
+      <script src="scripts/cartCrud/models/cartOperations.js"></script>
+      
+   </head>
+   <body>
+      <header>
+         <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container contain d-flex justify-content-between" >
+               <strong class="navbar-brand d-flex align-items-center"><i class="fas fa-shopping-bag fa-2x"></i>&nbsp; H&Y Shop</strong>
+               
+               <button onclick="location.href='login.html'" class="btn btn-outline-info">
+                  <i class="fas fa-shopping-cart fa-lg" ></i>
+               </button>
+               
+               <button onclick="location.href='login.html'" class="btn btn-outline-info">
+                  <i class="fas fa-sign-in-alt fa-lg"></i>
+               </button>
+            </div>
+      </header>
+      <main role="main">
+         <section>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <img class="d-block w-100" src="assets/public/slider/carousel4.jpg" alt="First slide">
+                  </div>
+                  <div class="carousel-item">
+                     <img class="d-block w-100" src="assets/public/slider/carousel2.jpg" alt="Second slide">
+                  </div>
+                  <div class="carousel-item">
+                     <img class="d-block w-100" src="assets/public/slider/carousel1.png" alt="Third slide">
+                  </div>
+               </div>
+               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+               <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+               </a>
+            </div>
+         </section>
+         <div class="album py-5 ">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-12 col-sm-12 col-lg-12" id="offer-div-1">
+                     <img src="assets/public/imageload/loading2.gif" class="img-fluid offer">
+                  </div>
+
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+
+                  <div class="col-md-6 col-sm-12 col-lg-6 "  id="offer-div-2">
+                     <img src="assets/public/imageload/loading3.gif"  class="img-fluid offer">
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-lg-6 "  id="offer-div-3">
+                     <img src="assets/public/imageload/loading3.gif" class="img-fluid offer">
+                  </div>
+
+
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-4">
+                     <div class="card mb-4 shadow-sm productDetails">
+                        <img class="productImageUrl" src="assets/public/imageload/loading1.gif" height="225" width="100%">
+                        <div class="card-body">
+                           <h4 class="text-center productName"></h4>
+                           <div class="d-flex justify-content-between align-items-center">
+                              <div class="button-div">
+                                 <button type="button" class="button-view btn btn-primary btn-inline waves-effect waves-light" data-toggle="modal" data-target="#modalQuickView">View</button>
+                                 <button type="button" class="cart-button btn btn-success btn-inline waves-effect waves-light" onclick="location.href='login.html'">Add to Cart  <i class="fas fa-shopping-cart"></i></button>
+                              </div>
+                              <strong>
+                                 <large class="text-muted productPrice"></large>
+                              </strong>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </main>
+
+      <!-- Modal: modalQuickView -->
+      <div class="modal fade" id="modalQuickView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" >
+         <div class="modal-content">
+            <div class="modal-body">
+               <div class="row">
+                  <div class="col-lg-5 col-sm-12">
+                     <img class="d-block w-100 rounded productDetails" id="Product_ImageUrl"  style="height:80% !important;margin-top:15%;margin-left:3% ;" src="assets/public/imageload/loading1.gif" >
+                  </div>
+                  <div class="col-lg-7 col-sm-12">
+                     <h2 class="h2-responsive product-name">
+                        <strong id="Product_Name" class="productDetails" style="margin-left: 5%;"></strong>
+                     </h2>
+                     <h4 class="h4-responsive">
+                        <span class="green-text">
+                        <h5 id="Product_Price" class="productDetails" style="margin-left: 5%;"></h5>
+                        </span>
+                     </h4>
+                     <div class="card">
+                        <div class="card-header">
+                           <h5 class="mb-0 productDetails" id="Product_Colour" ></h5>
+                        </div>
+                        <div class="card-body productDetails" id="Product_Description">
+                           
+                        </div>
+                     </div>
+                     <div class="card-body">
+                        <div class="text-center">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                           <button class="btn btn-primary button-modal-cart cart-button" onclick="location.href='login.html'">Add to cart
+                           <i class="fas fa-cart-plus ml-2" aria-hidden="true"></i>
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Modal: modalQuickView -->
+   
+      <footer class="page-footer text-light font-small bg-primary">
+         <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a class="text-light" target="_blank" style="text-decoration: none;" href="https://github.com/YateshChhabra">github.com/YateshChhabra</a>
+         </div>
+      </footer>
+   </body>
+</html>

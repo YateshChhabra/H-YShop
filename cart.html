@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!--Bootstrap-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <!--Font Awsome-->
+      <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>  
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+      <!--Firebase-->
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+      <!--Utility-->
+      <script src="utils/firebaseConfig.js"></script>
+      <script src="utils/compareToken.js"></script>
+      <script src="utils/checkUserAuth.js"></script>
+      <!--Sweet Alert 2-->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+      <!--Css-->
+      <link rel="stylesheet" type="text/css" href="assets/css/cart.css">
+      <!--Cart Script-->
+      <script src="scripts/cartCrud/controllers/cartController.js"></script>
+      <script src="scripts/userCrud/models/userOperations.js"></script>
+      <script src="scripts/cartCrud/models/cartOperations.js"></script>
+      <script src="scripts/offerCrud/models/offerOperations.js"></script>
+      <script src="scripts/productCrud/models/productOperations.js"></script>
+      <script src="scripts/orderCrud/models/orderOperations.js"></script>
+      <script src="scripts/orderCrud/models/order.js"></script>
+      
+   </head>
+   <body>
+      <header>
+         <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container contain d-flex justify-content-between" >
+              <a href="h&yshop.html" style="text-decoration: none;"><strong class="navbar-brand d-flex align-items-center"><i class="fas fa-shopping-bag fa-2x"></i>&nbsp; H&Y Shop</strong></a>
+              <div class="form-inline">
+                <input class="form-control mr-sm-2" id="enterProduct" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" id="searchProductDetails" type="submit">Search</button>
+              </div>
+              <button  id="signOut" class="btn btn-outline-info"><i class="fas fa-sign-out-alt fa-lg"></i></button>
+              <strong id="welcome-user" class="navbar-brand d-flex align-items-center"></strong>
+            </div>
+      </header>
+
+      <div class="px-4 px-lg-0">    
+        <div class="pb-5">
+          <div class="container">
+            <div class="row py-5">
+              <div class="col-lg-12 col-sm-12 col-md-12 bg-white rounded shadow-sm mb-5">
+      
+                <!-- Shopping cart table -->
+                <div class="table-responsive">
+                  <table class="table" id="cartTable">
+                    <thead id="cartHead">
+                      <tr>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="p-2 px-3 text-uppercase">Product</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="py-2 text-uppercase">Colour</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="py-2 text-uppercase">Quantity</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="py-2 text-uppercase">Remove</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="cart">
+                      
+                    </tbody>
+                  </table>
+                </div>
+                <!-- End -->
+                
+              </div>
+            </div>
+      
+            <div class="row py-5 p-4 bg-white rounded shadow-sm">
+              <div class="col-lg-6">
+                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Offer code</div>
+                <div class="p-4">
+                  <p class="font-italic mb-4">If you have a offer code, please enter it in the box below</p>
+                  <div class="input-group mb-4 border rounded-pill p-2 spanOfferError" >
+                    <input type="text" id="offer_code" placeholder="Apply offer" aria-describedby="button-addon3" class="form-control border-0">
+                    <div class="input-group-append border-0">
+                      <button id="apply_offer" type="button" class="btn btn-dark px-4 rounded-pill" ><i class="fa fa-gift mr-2"></i>Apply offer</button>
+                    </div>
+                  </div>
+                  <span id="offer-message"></span>
+                </div>
+
+                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Payment Mode</div>
+                  <div class="p-4 " id="paymentMode">             
+                      <div class="input-group mb-4 border rounded-pill p-2 spanPayError" >
+                        <select id="payMode"  class="custom-select" required>
+                          <option selected>Select Mode Of Payment</option>
+                          <option class="dropdown-item" >Debit Card</option>
+                            <option class="dropdown-item" >Credit Card</option>
+                            <option class="dropdown-item" >Cash On Delivery</option>
+                        </select>
+                      </div>
+                    <span id="payment-message"></span>
+                  </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                <div class="p-4">
+                  <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+                  <ul class="list-unstyled mb-4" id="billing">
+                    <li class="d-flex justify-content-between py-3 border-bottom" ><strong class="text-muted">Order Subtotal </strong><strong id="subTotal"></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom" ><strong class="text-muted">Shipping and handling</strong><strong id="ship_handle"></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom" ><strong class="text-muted">Tax</strong><strong id="tax"></strong></li>
+
+                    <li class="d-flex justify-content-between py-3 border-bottom" ><strong class="text-muted">Offer Discount</strong><strong id="offerDiscount">&#x20B9; 0</strong></li>
+
+                    <li class="d-flex justify-content-between py-3 border-bottom" ><strong class="text-muted">Total</strong>
+                      <h5 class="font-weight-bold" id="total"></h5>
+                    </li>
+
+                  </ul>
+                  <a href="javascript:void(0)" class="btn btn-dark rounded-pill py-2 btn-block" id="checkout" >Procceed to checkout</a>
+                  <span id="checkout-message"></span>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+      <footer class="page-footer text-light font-small bg-primary">
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+           <a class="text-light" target="_blank" style="text-decoration: none;" href="https://github.com/YateshChhabra">github.com/YateshChhabra</a>
+        </div>
+     </footer>
+  </body>
+</html>
