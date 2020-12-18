@@ -263,13 +263,28 @@ function callbackforShowModal(bool,obj){
 //Product add to localStorage
 function addToCart(){
     if(this.id == ""){
-        swal.fire({
-            icon: "error",
-            title: "Products Still Loading",
-            text: "Products are still loading, Please wait till the products are loaded."
-        });
+        document.getElementsByClassName("heading")[0].innerText="Products Still Loading";
+        document.getElementsByClassName("change-color")[0].innerText="Products are still loading,";
+        document.getElementsByClassName("change-color")[1].innerText="Please wait till the products are loaded.";
+        let pTag= document.getElementsByClassName("errorIcon")[0];
+        let eIcon = document.createElement("i");
+        
+        eIcon.className="fa fa-exclamation-triangle fa-4x";
+        pTag.appendChild(eIcon);
     }
     else{
+        document.getElementsByClassName("heading")[0].innerText="Product Added In The Cart";
+        document.getElementsByClassName("change-color")[0].innerText="Your product is added into the cart.";
+        document.getElementsByClassName("change-color")[1].innerText="Thank You for the purchase.";
+
+        let pTag= document.getElementsByClassName("errorIcon")[0];
+        let eIcon = document.createElement("i");
+        if(pTag.firstElementChild){
+            pTag.removeChild(pTag.firstElementChild);
+        }
+        eIcon.className="fas fa-shopping-cart fa-4x";
+        pTag.appendChild(eIcon);
+
         var productFullID = this.id;
         var product=productFullID.split("-");
         var productCategory=product[0];
