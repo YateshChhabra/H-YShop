@@ -268,7 +268,9 @@ function addToCart(){
         document.getElementsByClassName("change-color")[1].innerText="Please wait till the products are loaded.";
         let pTag= document.getElementsByClassName("errorIcon")[0];
         let eIcon = document.createElement("i");
-        
+        if(pTag.firstElementChild){
+            pTag.removeChild(pTag.firstElementChild);
+        }
         eIcon.className="fa fa-exclamation-triangle fa-4x";
         pTag.appendChild(eIcon);
     }
