@@ -38,7 +38,7 @@ function validateSignUpForm(){
             for(let i=0;i<resultArr.length;i++){
                 if(resultArr[i]==false){
                     if(i==0){
-                        span_array[i].innerText="Eg: abc@aAbB9";
+                        span_array[i].innerText="Username should be of length 9, 4th letter should be @ \n Eg : abc@abcd";
                     }
                     else if(i==1){
                         span_array[i].innerText="Eg: +91-0123456789";
